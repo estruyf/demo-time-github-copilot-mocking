@@ -1,0 +1,32 @@
+title: github copilot
+description: ''
+version: 3
+scenes:
+  - id: scene-mpcoiee3-9yb5
+    title: Start devproxy
+    moves:
+      - action: executeTerminalCommand
+        command: devproxy
+        terminalId: devproxy
+        autoExecute: true
+      - action: executeVSCodeCommand
+        command: workbench.action.closePanel
+  - id: scene-mpcoi72d-fnty
+    title: Testing out github copilot
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Let me check if this is working with Demo Time
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - id: scene-mpcokjjn-uszm
+    title: Stop devproxy
+    moves:
+      - action: executeVSCodeCommand
+        command: terminal.focus
+      - action: sendKeybinding
+        keybinding: ctrl+c
+      - action: waitForTimeout
+        timeout: 1000
+      - action: closeTerminal
+        terminalId: devproxy

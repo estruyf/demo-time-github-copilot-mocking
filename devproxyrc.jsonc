@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    {
+      "name": "MockResponsePlugin",
+      "enabled": true,
+      "pluginPath": "~appFolder/plugins/DevProxy.Plugins.dll",
+      "configSection": "mocksPlugin"
+    }
+  ],
+  "urlsToWatch": [
+    "https://api.individual.githubcopilot.com/*",
+    "https://api.githubcopilot.com/*"
+  ],
+  "languageModel": {
+    "enabled": true,
+    "url": "https://api.individual.githubcopilot.com"
+  },
+  "mocksPlugin": {
+    "mocksFile": "mocks.json"
+  }
+}
