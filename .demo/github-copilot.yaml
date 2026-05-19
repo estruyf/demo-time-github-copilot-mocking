@@ -19,6 +19,14 @@ scenes:
         content: Let me check if this is working with Demo Time
         insertTypingSpeed: 5
       - action: pressEnter
+  - id: demo-mpcp232l-xh9x
+    title: Another message
+    moves:
+      - action: openCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Can you tell a joke?
+      - action: pressEnter
   - id: scene-mpcokjjn-uszm
     title: Stop devproxy
     moves:
