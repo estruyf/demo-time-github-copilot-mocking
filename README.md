@@ -42,6 +42,21 @@ kill -SIGINT $(pgrep devproxy)
 
 ## How to customize responses
 
+### Generate mock files from a message
+
+Use the generator script when you want to create a new pair of mock files and retarget mocks.json in one step:
+
+```bash
+node generate-mock.mjs "Hello from the mock" demo
+```
+
+This writes:
+
+- `demo-messages.txt`
+- `demo-responses.txt`
+
+You can also pass an optional output directory as the third argument.
+
 ### 1) Change streamed Copilot output
 
 - Edit `messages-mock.txt` for `/v1/messages*` responses.

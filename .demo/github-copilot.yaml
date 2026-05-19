@@ -14,6 +14,17 @@ scenes:
   - id: scene-mpcoi72d-fnty
     title: Testing out github copilot
     moves:
+      - action: executeScript
+        id: generate-mock
+        command: node
+        path: generate-mock.mjs
+        args:
+          - Hello from the mock file
+          - demo1
+        waitForMessage: Done.
+        showProgress: false
+      - action: waitForTimeout
+        timeout: 200
       - action: newCopilotChat
       - action: typeText
         content: Let me check if this is working with Demo Time
@@ -22,6 +33,17 @@ scenes:
   - id: demo-mpcp232l-xh9x
     title: Another message
     moves:
+      - action: executeScript
+        id: generate-mock
+        command: node
+        path: generate-mock.mjs
+        args:
+          - This is a message from the second demo mock file
+          - demo2
+        showProgress: false
+        waitForMessage: Done.
+      - action: waitForTimeout
+        timeout: 200
       - action: openCopilotChat
       - action: typeText
         insertTypingSpeed: 5
