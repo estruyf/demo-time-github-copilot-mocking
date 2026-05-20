@@ -12,7 +12,7 @@
           { "name": "Content-Type", "value": "text/event-stream" },
           { "name": "Cache-Control", "value": "no-cache" }
         ],
-        "body": "@demo1-messages.txt"
+        "body": "@file-creation-messages.txt"
       }
     },
     {
@@ -26,7 +26,7 @@
           { "name": "Content-Type", "value": "text/event-stream" },
           { "name": "Cache-Control", "value": "no-cache" }
         ],
-        "body": "@demo1-messages.txt"
+        "body": "@file-creation-messages.txt"
       }
     },
     {
@@ -40,7 +40,7 @@
           { "name": "Content-Type", "value": "text/event-stream" },
           { "name": "Cache-Control", "value": "no-cache" }
         ],
-        "body": "@demo1-responses.txt"
+        "body": "@file-creation-responses.txt"
       }
     },
     {
@@ -54,7 +54,7 @@
           { "name": "Content-Type", "value": "text/event-stream" },
           { "name": "Cache-Control", "value": "no-cache" }
         ],
-        "body": "@demo1-responses.txt"
+        "body": "@file-creation-responses.txt"
       }
     },
     {

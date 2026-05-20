@@ -1,4 +1,5 @@
 {
   "demoTime.defaultFileType": "yaml",
-  "chat.advanced.responsesApi.webSocket.enabled": false
+  "chat.advanced.responsesApi.webSocket.enabled": false,
+  "github.copilot.chat.advanced.responsesApi.webSocket.enabled": false
 }
