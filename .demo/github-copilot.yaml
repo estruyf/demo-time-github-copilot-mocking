@@ -61,6 +61,61 @@ scenes:
         insertTypingSpeed: 5
         content: Can you tell a joke?
       - action: pressEnter
+  - id: scene-file-mock
+    title: Another message
+    moves:
+      - action: executeScript
+        id: set-mock
+        command: node
+        path: set-mock.mjs
+        args:
+          - file-creation
+        waitForMessage: Done.
+        showProgress: true
+      - action: waitForTimeout
+        timeout: 1000
+        disabled: false
+      - action: openCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Can you create me a `test.json` file with some dummy content?
+      - action: pressEnter
+  - id: scene-tool-call-mock
+    title: Tool call mock
+    moves:
+      - action: executeScript
+        id: set-mock
+        command: node
+        path: set-mock.mjs
+        args:
+          - tool-call
+        waitForMessage: Done.
+        showProgress: true
+      - action: waitForTimeout
+        timeout: 1000
+      - action: openCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Read the file src/index.ts
+      - action: pressEnter
+  - id: scene-redacted-thinking-mock
+    title: Redacted thinking mock
+    moves:
+      - action: executeScript
+        id: set-mock
+        command: node
+        path: set-mock.mjs
+        args:
+          - redacted-thinking
+        waitForMessage: Done.
+        showProgress: true
+      - action: waitForTimeout
+        timeout: 1000
+      - action: openCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Refactor this function with improved error handling
+      - action: pressEnter
   - id: scene-mpcokjjn-uszm
     title: Stop devproxy
     moves:

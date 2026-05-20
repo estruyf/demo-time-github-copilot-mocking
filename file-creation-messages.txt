@@ -35,7 +35,7 @@ event: content_block_delta
 data: {"delta":{"thinking":"","type":"thinking_delta"},"index":0,"type":"content_block_delta"}
 
 event: content_block_delta
-data: {"delta":{"signature":"EswCCmUIDRACGAIqQKDhCpfG1IsLH5oEjSAPDchX0YBuNTS5cBZ0m/8DTAzkafO97WTXab7xWLf8KHymnHo16TE1Gq0GYb0ZcJ2qqb8yGWNsYXVkZS1oYWlrdS00LTUtMjAyNTEwMDE4ABIMF9XcQFg8gXFXaodtGgx+lQKHHgKJ6fRyWz4iMFnjFdqTzjcJvUNLNxq57+N4RkZrIoqKYMW8rkakUrs/0q2YfcgewnXu9ySAaVjQ+iqUAZpZLmVSM7FF/57lHllbi6324W+4WcxBXiW/X0lleJm9CcfiDWJgro+N/Ut/vTSRWz56NrzF/PlNuOEI7tfBUd5QpNOnPSa1NMN3oChROz6xO40PiuFHm/AOzbRyolrMqyNpr+Bfc8gVFBrC3kwvRwHkfFIhBokPyC+fm+Y/IyHqUKWPJkSFN9tnZCh+lAJ3re/qoEsYAQ==","type":"signature_delta"},"index":0,"type":"content_block_delta"}
+data: {"delta":{"signature":"just-a-signature","type":"signature_delta"},"index":0,"type":"content_block_delta"}
 
 event: content_block_stop
 data: {"index":0,"type":"content_block_stop"}
