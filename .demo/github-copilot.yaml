@@ -11,6 +11,7 @@ scenes:
         autoExecute: true
       - action: executeVSCodeCommand
         command: workbench.action.closePanel
+        disabled: true
   - id: scene-mpcoi72d-fnty
     title: Testing out github copilot
     moves:
@@ -22,9 +23,11 @@ scenes:
           - Hello from the mock file
           - demo1
         waitForMessage: Done.
-        showProgress: false
+        showProgress: true
+        disabled: false
       - action: waitForTimeout
-        timeout: 200
+        timeout: 1000
+        disabled: false
       - action: newCopilotChat
       - action: typeText
         content: Let me check if this is working with Demo Time
@@ -40,10 +43,12 @@ scenes:
         args:
           - This is a message from the second demo mock file
           - demo2
-        showProgress: false
+        showProgress: true
         waitForMessage: Done.
+        disabled: false
       - action: waitForTimeout
-        timeout: 200
+        timeout: 1000
+        disabled: false
       - action: openCopilotChat
       - action: typeText
         insertTypingSpeed: 5

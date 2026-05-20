@@ -1,3 +1,4 @@
 {
-  "demoTime.defaultFileType": "yaml"
+  "demoTime.defaultFileType": "yaml",
+  "chat.advanced.responsesApi.webSocket.enabled": false
 }
