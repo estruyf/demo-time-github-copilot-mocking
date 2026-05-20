@@ -2,6 +2,13 @@ title: github copilot
 description: ''
 version: 3
 scenes:
+  - id: scene-mpdq1h87-e75r
+    title: Disable web socket connection
+    moves:
+      - action: setSetting
+        setting:
+          key: chat.advanced.responsesApi.webSocket.enabled
+          value: false
   - id: scene-mpcoiee3-9yb5
     title: Start devproxy
     moves:

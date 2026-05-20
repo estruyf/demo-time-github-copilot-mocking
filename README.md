@@ -88,7 +88,38 @@ You can also pass an optional output directory as the third argument.
 4. Tweak `messages-mock.txt` or `responses-mock.txt` as needed.
 5. Re-run the same prompt to demonstrate deterministic behavior.
 
+## Disable WebSocket (force HTTP POST)
+
+Dev Proxy currently does **not** support WebSocket traffic (yet), so WebSocket-based Copilot responses are not intercepted by these mocks.
+
+Reference issue: https://github.com/dotnet/dev-proxy/issues/1567
+
+To keep Copilot Chat requests mockable through Dev Proxy, force HTTP POST by disabling WebSocket transport.
+
+### VS Code internal setting
+
+Use this team-internal setting in your VS Code `settings.json` (or equivalent configuration service mock):
+
+```json
+"chat.advanced.responsesApi.webSocket.enabled": false
+```
+
+### Behavior notes
+
+- The setting defaults to `false`.
+- In some environments, experimentation/flighting can enable WebSocket transport for specific users.
+- Setting this value explicitly to `false` is the safest way to keep HTTP POST behavior for demos and tests.
+
+### Optional fallback if you control model metadata
+
+If you control the mock endpoint or model metadata, you can also prevent WebSocket selection by ensuring the model's `supported_endpoints` does **not** include `ModelSupportedEndpoint.WebSocketResponses`.
+
+That effectively short-circuits WebSocket selection regardless of experiment state.
+
 ## Troubleshooting
+
+- WebSocket requests bypass mocks:
+	- See the **Disable WebSocket (force HTTP POST)** section above.
 
 - No mocked response:
 	- Verify Dev Proxy is running.
