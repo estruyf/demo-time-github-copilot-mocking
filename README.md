@@ -7,15 +7,16 @@ This project uses Dev Proxy to mock GitHub Copilot Chat network calls so you can
 - Intercepts Copilot API requests to:
 	- https://api.individual.githubcopilot.com/*
 	- https://api.githubcopilot.com/*
-- Returns local mock responses from text and JSON files.
-- Supports both streaming endpoints and non-streaming chat completion endpoints.
+- Returns local mock responses from local SSE files.
+- Supports `/v1/messages`, `/responses`, and `/chat/completions` endpoint variants.
 
 ## Files in this folder
 
 - `devproxyrc.jsonc`: Dev Proxy configuration (plugins, watched URLs, mock settings).
 - `mocks.json`: Request matching rules and corresponding mock responses.
-- `messages-mock.txt`: Mock SSE stream for `/v1/messages` requests.
-- `responses-mock.txt`: Mock SSE stream for `/responses` requests.
+- `demo1-messages.txt`: Mock SSE stream for `/v1/messages` requests.
+- `demo1-responses.txt`: Mock SSE stream for `/responses` requests.
+- `demo1-chat-completions.txt`: Mock SSE stream for `/chat/completions` requests.
 
 ## Prerequisites
 
@@ -44,7 +45,7 @@ kill -SIGINT $(pgrep devproxy)
 
 ### Generate mock files from a message
 
-Use the generator script when you want to create a new pair of mock files and retarget mocks.json in one step:
+Use the generator script when you want to create a new set of mock files and retarget mocks.json in one step:
 
 ```bash
 node generate-mock.mjs "Hello from the mock" demo
@@ -54,22 +55,24 @@ This writes:
 
 - `demo-messages.txt`
 - `demo-responses.txt`
+- `demo-chat-completions.txt`
 
 You can also pass an optional output directory as the third argument.
 
 ### 1) Change streamed Copilot output
 
-- Edit `messages-mock.txt` for `/v1/messages*` responses.
-- Edit `responses-mock.txt` for `/responses*` responses.
+- Edit `demo1-messages.txt` for `/v1/messages*` responses.
+- Edit `demo1-responses.txt` for `/responses*` responses.
+- Edit `demo1-chat-completions.txt` for `/chat/completions*` responses.
 - Keep valid SSE format:
 	- `event: ...`
 	- `data: ...`
 	- Blank line between events.
 
-### 2) Change chat completion output
+### 2) Switch between named mock sets
 
-- Edit the `/chat/completions*` mock objects in `mocks.json`.
-- Update `choices[0].message.content` with your desired output.
+- Run `node set-mock.mjs demo1` to activate `demo1-messages.txt`, `demo1-responses.txt`, and `demo1-chat-completions.txt`.
+- Run `node set-mock.mjs <name>` after generating a new set.
 
 ### 3) Add new endpoints
 
@@ -85,8 +88,20 @@ You can also pass an optional output directory as the third argument.
 1. Start Dev Proxy.
 2. Trigger a Copilot Chat request from your app/editor.
 3. Confirm the mocked response appears.
-4. Tweak `messages-mock.txt` or `responses-mock.txt` as needed.
+4. Tweak the active `*-messages.txt`, `*-responses.txt`, or `*-chat-completions.txt` files as needed.
 5. Re-run the same prompt to demonstrate deterministic behavior.
+
+## VS Code demo setup
+
+To ensure Copilot traffic goes through Dev Proxy in a demo environment:
+
+1. Start Dev Proxy in this folder with `devproxy`.
+2. In the VS Code host used for the demo, make sure this setting is set:
+	- `"chat.advanced.responsesApi.webSocket.enabled": false`
+3. Configure proxy env vars for the host process running Copilot Chat:
+	- `HTTPS_PROXY=http://127.0.0.1:8000`
+	- `HTTP_PROXY=http://127.0.0.1:8000`
+4. If HTTPS interception certs are not trusted yet, trust the Dev Proxy root certificate so TLS requests can be intercepted.
 
 ## Disable WebSocket (force HTTP POST)
 
@@ -126,7 +141,7 @@ That effectively short-circuits WebSocket selection regardless of experiment sta
 	- Verify URL patterns in `mocks.json` match the actual request URL.
 	- Ensure your client is routing traffic through Dev Proxy.
 - Broken stream output:
-	- Validate SSE formatting in `messages-mock.txt` or `responses-mock.txt`.
+	- Validate SSE formatting in your active `*-messages.txt`, `*-responses.txt`, or `*-chat-completions.txt` file.
 	- Ensure each `data:` line is valid JSON where required.
 - Wrong endpoint mocked:
 	- Check whether the client is calling `api.individual.githubcopilot.com` or `api.githubcopilot.com` and update the corresponding mock.

@@ -9,14 +9,8 @@
   ],
   "urlsToWatch": [
     "https://api.individual.githubcopilot.com/*",
-    "https://api.githubcopilot.com/*",
-    "wss://api.individual.githubcopilot.com/*",
-    "wss://api.githubcopilot.com/*"
+    "https://api.githubcopilot.com/*"
   ],
-  "languageModel": {
-    "enabled": true,
-    "url": "https://api.individual.githubcopilot.com"
-  },
   "mocksPlugin": {
     "mocksFile": "mocks.json"
   }

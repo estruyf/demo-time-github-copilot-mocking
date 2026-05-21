@@ -3,7 +3,7 @@ import path from 'node:path';
 
 function printUsage() {
 	console.error('Usage: node generate-mock.mjs "message to return" "name" [outputDir]');
-	console.error('Creates <name>-messages.txt and <name>-responses.txt, then updates the active messages/responses bodies in mocks.json.');
+	console.error('Creates <name>-messages.txt, <name>-responses.txt, and <name>-chat-completions.txt, then updates the active mock bodies in mocks.json.');
 }
 
 function escapeJson(value) {
@@ -15,17 +15,20 @@ async function updateMocksFile(name) {
 	const source = await readFile(filePath, 'utf8');
 	const messagesBodyPattern = /"body": "@[^"]+-messages\.txt"/g;
 	const responsesBodyPattern = /"body": "@[^"]+-responses\.txt"/g;
+	const completionsBodyPattern = /"body": "@[^"]+-chat-completions\.txt"/g;
 
 	const hasMessagesBodies = messagesBodyPattern.test(source);
 	const hasResponsesBodies = responsesBodyPattern.test(source);
+	const hasCompletionsBodies = completionsBodyPattern.test(source);
 
-	if (!hasMessagesBodies || !hasResponsesBodies) {
+	if (!hasMessagesBodies || !hasResponsesBodies || !hasCompletionsBodies) {
 		throw new Error(`No matching body references were found in ${filePath}`);
 	}
 
 	const next = source
 		.replace(messagesBodyPattern, `"body": "@${name}-messages.txt"`)
-		.replace(responsesBodyPattern, `"body": "@${name}-responses.txt"`);
+		.replace(responsesBodyPattern, `"body": "@${name}-responses.txt"`)
+		.replace(completionsBodyPattern, `"body": "@${name}-chat-completions.txt"`);
 
 	if (next !== source) {
 		await writeFile(filePath, next, 'utf8');
@@ -206,6 +209,62 @@ function createResponseMock(messageText, name) {
 	].join('\n');
 }
 
+function createChatCompletionsMock(messageText, name) {
+	return [
+		`data: ${escapeJson({
+			choices: [{
+				delta: { role: 'assistant', content: '' },
+				index: 0,
+				finish_reason: null,
+			}],
+			created: 1700000000,
+			id: `chatcmpl_${name}_01`,
+			model: 'gpt-4o',
+			object: 'chat.completion.chunk',
+		})}`,
+		'',
+		`data: ${escapeJson({
+			choices: [{
+				delta: { content: messageText },
+				index: 0,
+				finish_reason: null,
+			}],
+			created: 1700000000,
+			id: `chatcmpl_${name}_01`,
+			model: 'gpt-4o',
+			object: 'chat.completion.chunk',
+		})}`,
+		'',
+		`data: ${escapeJson({
+			choices: [{
+				delta: {},
+				index: 0,
+				finish_reason: 'stop',
+			}],
+			created: 1700000000,
+			id: `chatcmpl_${name}_01`,
+			model: 'gpt-4o',
+			object: 'chat.completion.chunk',
+		})}`,
+		'',
+		`data: ${escapeJson({
+			choices: [],
+			created: 1700000000,
+			id: `chatcmpl_${name}_01`,
+			model: 'gpt-4o',
+			object: 'chat.completion.chunk',
+			usage: {
+				prompt_tokens: 10,
+				completion_tokens: 5,
+				total_tokens: 15,
+			},
+		})}`,
+		'',
+		'data: [DONE]',
+		'',
+	].join('\n');
+}
+
 async function main() {
 	const [, , messageText, name, outputDir = '.'] = process.argv;
 
@@ -219,17 +278,20 @@ async function main() {
 	const targetDir = path.resolve(process.cwd(), outputDir);
 	const messagesPath = path.join(targetDir, `${safeName}-messages.txt`);
 	const responsesPath = path.join(targetDir, `${safeName}-responses.txt`);
+	const completionsPath = path.join(targetDir, `${safeName}-chat-completions.txt`);
 
 	await mkdir(targetDir, { recursive: true });
 	await Promise.all([
 		writeFile(messagesPath, createMessageMock(messageText, safeName), 'utf8'),
 		writeFile(responsesPath, createResponseMock(messageText, safeName), 'utf8'),
+		writeFile(completionsPath, createChatCompletionsMock(messageText, safeName), 'utf8'),
 	]);
 
 	await updateMocksFile(safeName);
 
 	console.log(`Wrote ${messagesPath}`);
 	console.log(`Wrote ${responsesPath}`);
+	console.log(`Wrote ${completionsPath}`);
 	console.log(`Updated ${path.join(process.cwd(), 'mocks.json')}`);
 	console.log('Done.');
 }
