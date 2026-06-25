@@ -1,0 +1,26 @@
+title: github copilot
+description: ''
+version: 3
+scenes:
+  - title: Apply proxy settings
+    moves:
+      - action: open
+        path: /.vscode/settings.json
+      - action: applyPatch
+        path: /.vscode/settings.json
+        contentPath: /.demo/snapshots/recording-20260625-201315/001-settings.json
+        patch: /.demo/patches/recording-20260625-201315/001-settings.json.patch
+      - action: save
+      - action: executeVSCodeCommand
+        command: workbench.action.reloadWindow
+  - title: Remove proxy settings
+    moves:
+      - action: open
+        path: /.vscode/settings.json
+      - action: applyPatch
+        path: /.vscode/settings.json
+        contentPath: /.demo/snapshots/recording-20260625-201315/002-settings.json
+        patch: /.demo/patches/recording-20260625-201315/002-settings.json.patch
+      - action: save
+      - action: executeVSCodeCommand
+        command: workbench.action.reloadWindow

@@ -1,0 +1,143 @@
+title: github copilot
+description: ''
+version: 3
+scenes:
+  - id: scene-mpcoi72d-fnty
+    title: Testing out github copilot
+    moves:
+      - action: executeScript
+        id: generate-mock
+        command: node
+        path: generate-mock.mjs
+        args:
+          - Hello from the mock file
+          - demo1
+        waitForMessage: Done.
+        showProgress: true
+        disabled: true
+      - action: waitForTimeout
+        timeout: 1000
+        disabled: true
+      - action: newCopilotChat
+      - action: typeText
+        content: Let me check if this is working with Demo Time
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - id: demo-mpcp232l-xh9x
+    title: Another message
+    moves:
+      - action: executeScript
+        id: generate-mock
+        command: node
+        path: generate-mock.mjs
+        args:
+          - This is a message from the second demo mock file
+          - demo2
+        showProgress: true
+        waitForMessage: Done.
+        disabled: true
+      - action: waitForTimeout
+        timeout: 1000
+        disabled: true
+      - action: newCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Can you tell a joke?
+      - action: pressEnter
+  - id: scene-file-mock
+    title: Fake file creation message
+    moves:
+      - action: executeScript
+        id: set-mock
+        command: node
+        path: set-mock.mjs
+        args:
+          - file-creation
+        waitForMessage: Done.
+        showProgress: true
+        disabled: true
+      - action: waitForTimeout
+        timeout: 1000
+        disabled: true
+      - action: newCopilotChat
+      - action: typeText
+        insertTypingSpeed: 5
+        content: Can you create me a `test.json` file with some dummy content?
+      - action: pressEnter
+  - title: List demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Can you show me a list?
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Table demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Please provide a table for this demo
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Code demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Can you show me some code?
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Callout demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Add a callout example
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Quote demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Can you provide a quote block?
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Command link demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Show a command URI example
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Workspace link demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Can you provide a link to a workspace file?
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: VS Code setting demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Show me the vscode setting JSON pattern
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: VS Code command demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Show me the vscode command JSON pattern
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Mixed formatting demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Give me mixed formatting output
+        insertTypingSpeed: 5
+      - action: pressEnter
+  - title: Emoji demo
+    moves:
+      - action: newCopilotChat
+      - action: typeText
+        content: Add an emoji status message
+        insertTypingSpeed: 5
+      - action: pressEnter

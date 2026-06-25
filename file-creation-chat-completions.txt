@@ -1,9 +1,0 @@
-data: {"choices":[{"delta":{"role":"assistant","content":""},"index":0,"finish_reason":null}],"created":1700000000,"id":"chatcmpl_file_creation_01","model":"gpt-4o","object":"chat.completion.chunk"}
-
-data: {"choices":[{"delta":{"content":"Created `test.json` with your content in JSON format."},"index":0,"finish_reason":null}],"created":1700000000,"id":"chatcmpl_file_creation_01","model":"gpt-4o","object":"chat.completion.chunk"}
-
-data: {"choices":[{"delta":{},"index":0,"finish_reason":"stop"}],"created":1700000000,"id":"chatcmpl_file_creation_01","model":"gpt-4o","object":"chat.completion.chunk"}
-
-data: {"choices":[],"created":1700000000,"id":"chatcmpl_file_creation_01","model":"gpt-4o","object":"chat.completion.chunk","usage":{"prompt_tokens":10,"completion_tokens":9,"total_tokens":19}}
-
-data: [DONE]
