@@ -24,7 +24,7 @@ scenes:
         insertTypingSpeed: 5
       - action: pressEnter
   - id: demo-mpcp232l-xh9x
-    title: Another message
+    title: Tell me a joke
     moves:
       - action: executeScript
         id: generate-mock

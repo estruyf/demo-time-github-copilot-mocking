@@ -24,3 +24,8 @@ scenes:
       - action: save
       - action: executeVSCodeCommand
         command: workbench.action.reloadWindow
+  - id: scene-mqtuvy8i-9ub2
+    title: Reload VSCode
+    moves:
+      - action: executeVSCodeCommand
+        command: workbench.action.reloadWindow
