@@ -141,3 +141,13 @@ scenes:
         content: Add an emoji status message
         insertTypingSpeed: 5
       - action: pressEnter
+  - id: demo-mqv93vns-vbzf
+    title: Add TS File
+    moves:
+      - action: deleteFile
+        path: add.ts
+      - action: newCopilotChat
+      - action: typeText
+        content: create a sample typescript file
+        insertTypingSpeed: 5
+      - action: pressEnter

@@ -77,6 +77,41 @@
   },
   {
     "input": ["emoji"],
-    "output": "Mock completed successfully. Ready for Demo Time."
+    "output": "Mock completed successfully. 💛 Ready for Demo Time. 💛"
+  },
+  {
+    "input": ["delay"],
+    "output": "This text comes after 1500sec.",
+    "delayMs": 1500
+  },
+  {
+    "input": ["create", "test.json"],
+    "output": "Created [test.json](test.json) with some dummy content.",
+    "toolCalls": [
+      {
+        "name": "create_file",
+        "arguments": "{\"command\":\"create\",\"path\":\"{{cwd}}/test.json\",\"file_text\":\"{\\\"hello\\\":\\\"world\\\"}\"}"
+      }
+    ]
+  },
+  {
+    "input": ["create a sample typescript file"],
+    "steps": [
+      {
+        "text": "Let me check what I can use for the sample TypeScript file.",
+        "delayMs": 200
+      },
+      {
+        "text": "Creating the TypeScript file now.",
+        "delayMs": 400,
+        "toolCalls": [
+          {
+            "name": "create_file",
+            "arguments": "{\"filePath\":\"{{cwd}}/add.ts\",\"content\":\"export function add(a: number, b: number): number {\\n  return a + b;\\n}\\n\"}"
+          }
+        ]
+      }
+    ],
+    "outcome": "Created add.ts"
   }
 ]
