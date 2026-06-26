@@ -3,10 +3,10 @@
   "chat.advanced.responsesApi.webSocket.enabled": false,
   "github.copilot.chat.advanced.responsesApi.webSocket.enabled": false,
   "github.copilot.chat.anthropic.useMessagesApi": true,
-  "github.copilot.advanced": {
-    "debug.overrideProxyUrl": "http://localhost:3000",
-    "debug.overrideCapiUrl": "http://localhost:3000",
-    "debug.overrideAuthType": "token"
-  }
+  // "github.copilot.advanced": {
+  //   "debug.overrideProxyUrl": "http://localhost:3000",
+  //   "debug.overrideCapiUrl": "http://localhost:3000",
+  //   "debug.overrideAuthType": "token"
+  // }
 }
 

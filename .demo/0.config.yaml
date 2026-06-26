@@ -24,6 +24,11 @@ scenes:
       - action: save
       - action: executeVSCodeCommand
         command: workbench.action.reloadWindow
+  - id: scene-mqupf5mx-pshj
+    title: Start copilot-mock-server
+    moves:
+      - action: executeTerminalCommand
+        command: copilot-mock-server
   - id: scene-mqtuvy8i-9ub2
     title: Reload VSCode
     moves:
