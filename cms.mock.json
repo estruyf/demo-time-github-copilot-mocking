@@ -113,5 +113,18 @@
       }
     ],
     "outcome": "Created add.ts"
+  },
+  {
+    "input": ["deploy"],
+    "sequence": [
+      { "text": "Starting deployment…", "delayMs": 0 },
+      {
+        "steps": [
+          { "text": "Building image.", "delayMs": 300 },
+          { "text": "Pushing to registry.", "delayMs": 500 }
+        ]
+      },
+      "Deployment complete. Version 1.4.2 is live."
+    ]
   }
 ]
